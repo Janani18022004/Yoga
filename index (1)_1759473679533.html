@@ -1,0 +1,1752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anna University Interzonal Yogasana Competition</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Registration button bottom right corner */
+        /* Registration button bottom right corner, visible when registration section is open */
+        #singleRegisterDiv {
+            position: fixed;
+            right: 40px;
+            bottom: 40px;
+            z-index: 100;
+            display: block;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-attachment: fixed;
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        header {
+            background: #1a2a6c;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .date {
+            font-style: italic;
+        }
+        
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 500px;
+            padding: 30px;
+        }
+        
+        .login-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1a2a6c;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        button {
+            padding: 12px;
+            background: #1a2a6c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #2a3b8c;
+        }
+        
+        .main-content {
+            display: none;
+            padding: 20px;
+        }
+        
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .category-card i {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #1a2a6c;
+        }
+        
+        .category-card h3 {
+            margin-bottom: 10px;
+            color: #1a2a6c;
+        }
+        
+        .scoring-section {
+            display: none;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .scoring-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .scoring-header h2 {
+            color: #1a2a6c;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .action-btn {
+            padding: 8px 15px;
+            background: #1a2a6c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .secondary-btn {
+            background: #6c757d;
+        }
+        
+        .danger-btn {
+            background: #b21f1f;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .judge-scores {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .judge-input {
+            width: 50px;
+            padding: 5px;
+            text-align: center;
+        }
+        
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 15px;
+            background: #b21f1f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        .print-only {
+            display: none;
+        }
+        
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .scoring-section, .scoring-section * {
+                visibility: visible;
+            }
+            .scoring-section {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+            .action-buttons, .logout-btn {
+                display: none !important;
+            }
+            .print-only {
+                display: block;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+        }
+        
+        .hidden {
+            display: none;
+        }
+
+        .score-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .close-modal {
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .registration-form {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .form-field {
+            flex: 1;
+        }
+        
+        .form-field label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .form-field input, .form-field select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .back-btn {
+            margin-bottom: 15px;
+            padding: 8px 15px;
+            background: #6c757d;
+        }
+        
+        .team-players {
+            margin-top: 15px;
+        }
+        
+        .player-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        
+        .player-row input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .scoring-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .scoring-table th, .scoring-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        
+        .scoring-table th {
+            background-color: #f2f2f2;
+        }
+        
+        .judge-input-small {
+            width: 40px;
+            padding: 5px;
+            text-align: center;
+        }
+        /* Larger inputs for judge modal */
+        .judge-modal-input {
+            width: 90px;
+            height: 44px;
+            padding: 6px 8px;
+            font-size: 18px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">AU-YC</div>
+            <h1>ANNA UNIVERSITY INTERZONAL YOGASANA COMPETITION 2025-26</h1>
+            <p class="subtitle">Anna University Sports Board Chennai</p>
+            <p class="subtitle">Organised by M. KUMARASAMY COLLEGE OF ENGINEERING, KARUR</p>
+            <p class="date">Date: 8/10/2025</p>
+        </header>
+
+        <div id="authContainer" class="auth-container">
+            <div class="login-form">
+                <h2>Login</h2>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="Enter username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter password">
+                </div>
+                <button id="loginBtn">Login</button>
+            </div>
+        </div>
+
+        <div id="mainContent" class="main-content">
+            <button id="logoutBtn" class="logout-btn">Logout</button>
+            
+            <div id="categoriesView">
+                <h2 style="text-align: center; margin: 20px 0; color: #1a2a6c;">Competition Categories</h2>
+                
+                <div class="categories">
+                    <div class="category-card" data-category="registration">
+                        <i class="fas fa-user-plus"></i>
+                        <h3>Registration</h3>
+                        <p>Register participants for all categories</p>
+                    </div>
+                    
+                    <div class="category-card" data-category="traditional-team">
+                        <i class="fas fa-users"></i>
+                        <h3>Traditional Team</h3>
+                        <p>Score and rank team performances</p>
+                    </div>
+                    
+                    <div class="category-card" data-category="traditional-individual">
+                        <i class="fas fa-user"></i>
+                        <h3>Traditional Individual</h3>
+                        <p>Score and rank individual performances</p>
+                    </div>
+                    
+                    <div class="category-card" data-category="artistic">
+                        <i class="fas fa-paint-brush"></i>
+                        <h3>Artistic</h3>
+                        <p>Score and rank artistic performances</p>
+                    </div>
+                    
+                    <div class="category-card" data-category="rhythmic">
+                        <i class="fas fa-music"></i>
+                        <h3>Rhythmic</h3>
+                        <p>Score and rank rhythmic performances</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Registration Section -->
+            <div id="registrationSection" class="scoring-section">
+                <button class="back-btn" onclick="showCategories()"><i class="fas fa-arrow-left"></i> Back to Categories</button>
+                <div class="scoring-header">
+                    <h2>Participant Registration</h2>
+                    <div class="action-buttons">
+                        <!-- Print button removed -->
+                    </div>
+                </div>
+                <div class="print-only" style="display:none;">
+                    <h2>ANNA UNIVERSITY INTERZONAL YOGASANA COMPETITION 2025-26</h2>
+                    <h3>Participant Registration List</h3>
+                </div>
+                <div class="registration-form">
+                    <h3>Add New Participant</h3>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="participantCategory">Category</label>
+                            <select id="participantCategory">
+                                <option value="">Select Category</option>
+                                <option value="Traditional Team">Traditional Team</option>
+                                <option value="Traditional Individual">Traditional Individual</option>
+                                <option value="Artistic">Artistic</option>
+                                <option value="Rhythmic">Rhythmic</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label for="participantCollege">College</label>
+                            <input type="text" id="participantCollege" placeholder="Enter college name">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-field" id="teamNumberRow" style="display:none;">
+                            <label for="teamNumber">Team Number</label>
+                            <input type="text" id="teamNumber" value="1" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row" id="nameRow">
+                        <div class="form-field" id="nameOrTeamField">
+                            <label for="participantName">Name</label>
+                            <input type="text" id="participantName" placeholder="Enter full name">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="participantGender">Gender</label>
+                            <select id="participantGender">
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row" id="registerRow">
+                        <div class="form-field" style="text-align:right;">
+                            <button class="action-btn" id="singleRegisterBtn" onclick="addNewParticipant()">Register</button>
+                        </div>
+                    </div>
+                    <div id="teamRegistration" class="hidden">
+                        <h4>Team Players (Max 6)</h4>
+                        <div id="playerFields">
+                            <div class="player-row">
+                                <input type="text" placeholder="Player 1 Name">
+                                <button class="danger-btn" onclick="removePlayer(this)"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                            <button class="secondary-btn" id="addPlayerBtn" onclick="addPlayerField()">Add Player</button>
+                        </div>
+                        <div class="form-row" id="teamRegisterRow" style="display:none; margin-top:15px;">
+                            <div class="form-field" style="text-align:right;">
+                                <button class="action-btn" id="teamRegisterBtn" onclick="addNewParticipant()">Register</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Traditional Team Section -->
+            <div id="traditionalTeamSection" class="scoring-section">
+                <button class="back-btn" onclick="showCategories()"><i class="fas fa-arrow-left"></i> Back to Categories</button>
+                
+                <div class="scoring-header">
+                    <h2>Traditional Team Scoring</h2>
+                    <div class="action-buttons">
+                        <button class="action-btn" onclick="calculateTeamRankings()">Calculate Rankings</button>
+                        <button class="action-btn" onclick="printBlankOfficialSheet('Team')">Print Blank Sheet</button>
+                    </div>
+                </div>
+                
+                <div class="print-only">
+                    <h2>ANNA UNIVERSITY INTERZONAL YOGASANA COMPETITION 2025-26</h2>
+                    <h3>Traditional Team - Scores and Rankings</h3>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="teamGenderFilter">Select Gender: </label>
+                        <select id="teamGenderFilter" onchange="filterTeamByGender()">
+                            <option value="All">All</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div id="teamScoringForm">
+                    <table class="scoring-table">
+                        <thead>
+                            <tr>
+                                <th>Sl.No</th>
+                                <th>Name</th>
+                                <th>Gender</th>
+                                <th>College</th>
+                                <th>Category</th>
+                                <th>Actions</th>
+                                <th>Total</th>
+                                <th>Rank</th>
+                            </tr>
+                        </thead>
+                        <tbody id="teamScoreBody">
+                            <!-- Team scoring rows will be added here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Traditional Individual Section -->
+            <div id="traditionalIndividualSection" class="scoring-section">
+                <button class="back-btn" onclick="showCategories()"><i class="fas fa-arrow-left"></i> Back to Categories</button>
+                
+                <div class="scoring-header">
+                    <h2>Traditional Individual Scoring</h2>
+                    <div class="action-buttons">
+                        <button class="action-btn" onclick="calculateIndividualRankings()">Calculate Rankings</button>
+                        <button class="action-btn" onclick="printBlankOfficialSheet('Traditional','Individual')">Print Blank Sheet</button>
+                    </div>
+                </div>
+                
+                <div class="print-only">
+                    <h2>ANNA UNIVERSITY INTERZONAL YOGASANA COMPETITION 2025-26</h2>
+                    <h3>Traditional Individual - Scores and Rankings</h3>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="individualGenderSelect">Select Gender</label>
+                        <select id="individualGenderSelect" onchange="loadIndividualPlayers()">
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div id="individualScoringForm">
+                    <table class="scoring-table">
+                        <thead>
+                            <tr>
+                                <th>Sl.No</th>
+                                <th>Name</th>
+                                <th>Gender</th>
+                                <th>College</th>
+                                <th>Category</th>
+                                <th>Actions</th>
+                                <th>Total</th>
+                                <th>Rank</th>
+                            </tr>
+                        </thead>
+                        <tbody id="individualScoreBody"></tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Artistic Section -->
+            <div id="artisticSection" class="scoring-section">
+                <button class="back-btn" onclick="showCategories()"><i class="fas fa-arrow-left"></i> Back to Categories</button>
+                <div class="scoring-header">
+                    <h2>Artistic Yogasana Scoring</h2>
+                    <div class="action-buttons">
+                        <button class="action-btn" onclick="calculateArtisticRankings()">Calculate Rankings</button>
+                        <button class="action-btn" onclick="printBlankArtisticSheet()">Print Blank Sheet</button>
+                    </div>
+                </div>
+                <div class="print-only">
+                    <h2>ANNA UNIVERSITY INTERZONAL YOGASANA COMPETITION 2025-26</h2>
+                    <h3>Artistic Yogasana - Scores and Rankings</h3>
+                </div>
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="artisticGenderSelect">Select Gender</label>
+                        <select id="artisticGenderSelect" onchange="loadArtisticPlayers()">
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="artisticScoringForm">
+                    <table class="scoring-table">
+                        <thead>
+                            <tr>
+                                <th>Sl.No</th>
+                                <th>Name</th>
+                                <th>Gender</th>
+                                <th>College</th>
+                                <th>Category</th>
+                                <th>Actions</th>
+                                <th>Total</th>
+                                <th>Rank</th>
+                            </tr>
+                        </thead>
+                        <tbody id="artisticScoreBody"></tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Rhythmic Section -->
+            <div id="rhythmicSection" class="scoring-section">
+                <button class="back-btn" onclick="showCategories()"><i class="fas fa-arrow-left"></i> Back to Categories</button>
+                <div class="scoring-header">
+                    <h2>Rhythmic Yogasana Scoring</h2>
+                    <div class="action-buttons">
+                        <button class="action-btn" onclick="calculateRhythmicRankings()">Calculate Rankings</button>
+                        <button class="action-btn" onclick="printBlankRhythmicSheet()">Print Blank Sheet</button>
+                    </div>
+                </div>
+                <div class="print-only">
+                    <h2>ANNA UNIVERSITY INTERZONAL YOGASANA COMPETITION 2025-26</h2>
+                    <h3>Rhythmic Yogasana - Scores and Rankings</h3>
+                </div>
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="rhythmicGenderSelect">Select Gender</label>
+                        <select id="rhythmicGenderSelect" onchange="loadRhythmicPlayers()">
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="rhythmicScoringForm">
+                    <table class="scoring-table">
+                        <thead>
+                            <tr>
+                                <th>Sl.No</th>
+                                <th>Name</th>
+                                <th>Gender</th>
+                                <th>College</th>
+                                <th>Category</th>
+                                <th>Actions</th>
+                                <th>Total</th>
+                                <th>Rank</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rhythmicScoreBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- All scripts should be at the end of body -->
+    <script>
+        const API_BASE = (window.API_BASE || 'http://localhost:3000').replace(/\/$/, '');
+        // Show registration button only when all fields are filled
+        function checkRegistrationFields() {
+            const category = document.getElementById('participantCategory').value;
+            const college = document.getElementById('participantCollege').value;
+            const gender = document.getElementById('participantGender').value;
+            let nameFilled = false;
+            if (category === 'Traditional Team') {
+                // For team, check at least one player name
+                const playerFields = document.querySelectorAll('#playerFields input');
+                nameFilled = Array.from(playerFields).some(input => input.value.trim() !== '');
+            } else {
+                const name = document.getElementById('participantName') ? document.getElementById('participantName').value : '';
+                nameFilled = name.trim() !== '';
+            }
+            const regBtn = document.getElementById('singleRegisterBtn');
+            if (category && college && gender && nameFilled) {
+                regBtn.style.display = '';
+            } else {
+                regBtn.style.display = 'none';
+            }
+        }
+
+        // Attach listeners to registration form fields
+        document.getElementById('participantCategory').addEventListener('change', checkRegistrationFields);
+        document.getElementById('participantCollege').addEventListener('input', checkRegistrationFields);
+        document.getElementById('participantGender').addEventListener('change', checkRegistrationFields);
+        document.getElementById('registrationSection').addEventListener('input', function(e) {
+            if (e.target.id === 'participantName' || e.target.closest('#playerFields')) {
+                checkRegistrationFields();
+            }
+        });
+
+        // Also check on page load and when showing registration section
+        function showCategories() {
+            document.querySelectorAll('.scoring-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById('categoriesView').style.display = 'block';
+            checkRegistrationFields();
+        }
+
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const category = this.getAttribute('data-category');
+                document.getElementById('categoriesView').style.display = 'none';
+                document.querySelectorAll('.scoring-section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                if (category === 'registration') {
+                    document.getElementById('registrationSection').style.display = 'block';
+                    checkRegistrationFields();
+                } else if (category === 'traditional-team') {
+                    document.getElementById('traditionalTeamSection').style.display = 'block';
+                    loadTeamParticipants();
+                } else if (category === 'traditional-individual') {
+                    document.getElementById('traditionalIndividualSection').style.display = 'block';
+                } else if (category === 'artistic') {
+                    document.getElementById('artisticSection').style.display = 'block';
+                } else if (category === 'rhythmic') {
+                    document.getElementById('rhythmicSection').style.display = 'block';
+                }
+            });
+        });
+        // Show registration button only when all fields are filled
+        function checkRegistrationFields() {
+            const category = document.getElementById('participantCategory').value;
+            const college = document.getElementById('participantCollege').value;
+            const gender = document.getElementById('participantGender').value;
+            let nameFilled = false;
+            if (category === 'Traditional Team') {
+                // For team, check at least one player name
+                const playerFields = document.querySelectorAll('#playerFields input');
+                nameFilled = Array.from(playerFields).some(input => input.value.trim() !== '');
+            } else {
+                const name = document.getElementById('participantName') ? document.getElementById('participantName').value : '';
+                nameFilled = name.trim() !== '';
+            }
+            const regBtnDiv = document.getElementById('singleRegisterDiv');
+            if (category && college && gender && nameFilled) {
+                regBtnDiv.style.display = 'block';
+            } else {
+                regBtnDiv.style.display = 'none';
+            }
+        }
+
+        // Attach listeners to registration form fields
+        document.getElementById('participantCategory').addEventListener('change', checkRegistrationFields);
+        document.getElementById('participantCollege').addEventListener('input', checkRegistrationFields);
+        document.getElementById('participantGender').addEventListener('change', checkRegistrationFields);
+        document.getElementById('registrationSection').addEventListener('input', function(e) {
+            if (e.target.id === 'participantName' || e.target.closest('#playerFields')) {
+                checkRegistrationFields();
+            }
+        });
+
+        // Also check on page load and when showing registration section
+        function showCategories() {
+            document.querySelectorAll('.scoring-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById('categoriesView').style.display = 'block';
+            checkRegistrationFields();
+        }
+
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const category = this.getAttribute('data-category');
+                document.getElementById('categoriesView').style.display = 'none';
+                document.querySelectorAll('.scoring-section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                if (category === 'registration') {
+                    document.getElementById('registrationSection').style.display = 'block';
+                    checkRegistrationFields();
+                } else if (category === 'traditional-team') {
+                    document.getElementById('traditionalTeamSection').style.display = 'block';
+                    loadTeamParticipants();
+                } else if (category === 'traditional-individual') {
+                    document.getElementById('traditionalIndividualSection').style.display = 'block';
+                } else if (category === 'artistic') {
+                    document.getElementById('artisticSection').style.display = 'block';
+                } else if (category === 'rhythmic') {
+                    document.getElementById('rhythmicSection').style.display = 'block';
+                }
+            });
+        });
+        // Show registration button only when all fields are filled
+        function checkRegistrationFields() {
+            const category = document.getElementById('participantCategory').value;
+            const college = document.getElementById('participantCollege').value;
+            const gender = document.getElementById('participantGender').value;
+            let nameFilled = false;
+            if (category === 'Traditional Team') {
+                // For team, check at least one player name
+                const playerFields = document.querySelectorAll('#playerFields input');
+                nameFilled = Array.from(playerFields).some(input => input.value.trim() !== '');
+            } else {
+                const name = document.getElementById('participantName') ? document.getElementById('participantName').value : '';
+                nameFilled = name.trim() !== '';
+            }
+            const regBtnDiv = document.getElementById('singleRegisterDiv');
+            if (category && college && gender && nameFilled) {
+                regBtnDiv.style.display = 'block';
+            } else {
+                regBtnDiv.style.display = 'none';
+            }
+        }
+
+        // Attach listeners to registration form fields
+        document.getElementById('participantCategory').addEventListener('change', checkRegistrationFields);
+        document.getElementById('participantCollege').addEventListener('input', checkRegistrationFields);
+        document.getElementById('participantGender').addEventListener('change', checkRegistrationFields);
+        document.getElementById('registrationSection').addEventListener('input', function(e) {
+            if (e.target.id === 'participantName' || e.target.closest('#playerFields')) {
+                checkRegistrationFields();
+            }
+        });
+
+        // Also check on page load and when showing registration section
+        function showCategories() {
+            document.querySelectorAll('.scoring-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById('categoriesView').style.display = 'block';
+            checkRegistrationFields();
+        }
+
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const category = this.getAttribute('data-category');
+                document.getElementById('categoriesView').style.display = 'none';
+                document.querySelectorAll('.scoring-section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                if (category === 'registration') {
+                    document.getElementById('registrationSection').style.display = 'block';
+                    checkRegistrationFields();
+                } else if (category === 'traditional-team') {
+                    document.getElementById('traditionalTeamSection').style.display = 'block';
+                    loadTeamParticipants();
+                } else if (category === 'traditional-individual') {
+                    document.getElementById('traditionalIndividualSection').style.display = 'block';
+                } else if (category === 'artistic') {
+                    document.getElementById('artisticSection').style.display = 'block';
+                } else if (category === 'rhythmic') {
+                    document.getElementById('rhythmicSection').style.display = 'block';
+                }
+            });
+        });
+        // Show/hide registration button based on registration section visibility
+        function updateRegisterButtonVisibility() {
+            const regSection = document.getElementById('registrationSection');
+            const regBtnDiv = document.getElementById('singleRegisterDiv');
+            if (regSection.style.display === 'block') {
+                regBtnDiv.style.display = 'block';
+            } else {
+                regBtnDiv.style.display = 'none';
+            }
+        }
+
+        // Update registration button visibility when showing categories or registration
+        function showCategories() {
+            document.querySelectorAll('.scoring-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById('categoriesView').style.display = 'block';
+            updateRegisterButtonVisibility();
+        }
+
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const category = this.getAttribute('data-category');
+                document.getElementById('categoriesView').style.display = 'none';
+                document.querySelectorAll('.scoring-section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                if (category === 'registration') {
+                    document.getElementById('registrationSection').style.display = 'block';
+                } else if (category === 'traditional-team') {
+                    document.getElementById('traditionalTeamSection').style.display = 'block';
+                    loadTeamParticipants();
+                } else if (category === 'traditional-individual') {
+                    document.getElementById('traditionalIndividualSection').style.display = 'block';
+                } else if (category === 'artistic') {
+                    document.getElementById('artisticSection').style.display = 'block';
+                } else if (category === 'rhythmic') {
+                    document.getElementById('rhythmicSection').style.display = 'block';
+                }
+                updateRegisterButtonVisibility();
+            });
+        });
+
+        // Also update on page load
+        window.addEventListener('DOMContentLoaded', updateRegisterButtonVisibility);
+        // Category selection logic
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const category = this.getAttribute('data-category');
+                // Hide categories view
+                document.getElementById('categoriesView').style.display = 'none';
+                // Hide all sections
+                document.querySelectorAll('.scoring-section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                // Show selected section
+                if (category === 'registration') {
+                    document.getElementById('registrationSection').style.display = 'block';
+                } else if (category === 'traditional-team') {
+                    document.getElementById('traditionalTeamSection').style.display = 'block';
+                    loadTeamParticipants();
+                } else if (category === 'traditional-individual') {
+                    document.getElementById('traditionalIndividualSection').style.display = 'block';
+                } else if (category === 'artistic') {
+                    document.getElementById('artisticSection').style.display = 'block';
+                } else if (category === 'rhythmic') {
+                    document.getElementById('rhythmicSection').style.display = 'block';
+                }
+            });
+        });
+        // Login functionality
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            // Simple authentication for demo
+            if (username === 'admin' && password === 'admin') {
+                document.getElementById('authContainer').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+                showCategories();
+            } else {
+                alert('Invalid credentials. Use admin/admin for demo.');
+            }
+        });
+
+        // Logout functionality
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            document.getElementById('authContainer').style.display = 'flex';
+            document.getElementById('mainContent').style.display = 'none';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        });
+
+        // Show categories view
+        function showCategories() {
+            document.querySelectorAll('.scoring-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById('categoriesView').style.display = 'block';
+        }
+
+        // Show/hide team number, name, and team player fields when category changes
+        const participantCategory = document.getElementById('participantCategory');
+        const teamRegistration = document.getElementById('teamRegistration');
+        const teamNumberRow = document.getElementById('teamNumberRow');
+        const nameRow = document.getElementById('nameRow');
+        const singleRegisterDiv = document.getElementById('singleRegisterDiv');
+        participantCategory.addEventListener('change', function() {
+            if (this.value === 'Traditional Team') {
+                teamRegistration.classList.remove('hidden');
+                teamNumberRow.style.display = 'flex';
+                nameRow.style.display = 'none';
+                singleRegisterDiv.style.display = 'block';
+            } else {
+                teamRegistration.classList.add('hidden');
+                teamNumberRow.style.display = 'none';
+                nameRow.style.display = 'flex';
+                singleRegisterDiv.style.display = '';
+            }
+        });
+        // Add/remove player fields logic
+        function addPlayerField() {
+            const playerFields = document.getElementById('playerFields');
+            const currentPlayers = playerFields.querySelectorAll('.player-row').length;
+            if (currentPlayers < 6) {
+                const newRow = document.createElement('div');
+                newRow.className = 'player-row';
+                newRow.innerHTML = `<input type="text" placeholder="Player ${currentPlayers + 1} Name">
+                    <button class="danger-btn" onclick="removePlayer(this)"><i class="fas fa-times"></i></button>`;
+                playerFields.appendChild(newRow);
+            }
+            document.getElementById('addPlayerBtn').disabled = (playerFields.querySelectorAll('.player-row').length >= 6);
+            // Show register button if 6 players
+            document.getElementById('teamRegisterRow').style.display = (playerFields.querySelectorAll('.player-row').length === 6) ? 'flex' : 'none';
+        }
+        function removePlayer(btn) {
+            const playerFields = document.getElementById('playerFields');
+            btn.parentElement.remove();
+            document.getElementById('addPlayerBtn').disabled = (playerFields.querySelectorAll('.player-row').length >= 6);
+            Array.from(playerFields.querySelectorAll('.player-row')).forEach((row, idx) => {
+                row.querySelector('input').placeholder = `Player ${idx + 1} Name`;
+            });
+            // Hide register button if less than 6 players
+            document.getElementById('teamRegisterRow').style.display = (playerFields.querySelectorAll('.player-row').length === 6) ? 'flex' : 'none';
+        }
+
+        // Remove duplicate variable declarations, use only one set at the top of the script
+        // participantCategory and teamRegistration are already declared above, so do not redeclare
+        var registerRow = document.getElementById('registerRow');
+        participantCategory.addEventListener('change', function() {
+            if (this.value === 'Traditional Team') {
+                registerRow.style.display = 'none';
+                teamRegistration.classList.remove('hidden');
+            } else {
+                registerRow.style.display = 'flex';
+                teamRegistration.classList.add('hidden');
+            }
+        });
+        function addNewParticipant() {
+    // Gather form data
+    
+    var category = document.getElementById('participantCategory').value;
+    var college = document.getElementById('participantCollege').value;
+    var gender = document.getElementById('participantGender').value;
+    var name = (category === 'Traditional Team') ? '' : document.getElementById('participantName').value;
+    var teamPlayers = [];
+    if (category === 'Traditional Team') {
+        var playerInputs = document.querySelectorAll('#playerFields input');
+        playerInputs.forEach(function(input) {
+            teamPlayers.push(input.value.trim());
+        });
+    }
+    var data = {
+        category: category,
+        college: college,
+        gender: gender,
+        name: name,
+        teamPlayers: teamPlayers
+    };
+    // Send to backend
+    fetch(API_BASE + '/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Network response was not ok');
+        return response.json();
+    })
+    .then(result => {
+        if (result && result.success) {
+            alert('Registered successfully!');
+            try { clearRegistrationForm(); } catch(e){}
+        } else {
+            throw new Error((result && result.message) || 'Unknown error');
+        }
+    })
+    .catch(error => {
+        try {
+            saveRegistrationOffline(data);
+            alert('Registered successfully!');
+        } catch(e) {
+            alert('Registration failed: ' + (error && error.message ? error.message : error));
+        }
+    });
+}
+
+        // Offline fallback storage for registrations
+        function saveRegistrationOffline(entry){
+            const key = 'registrations';
+            let list = [];
+            try { list = JSON.parse(localStorage.getItem(key) || '[]'); } catch(e){ list = []; }
+            const newEntry = Object.assign({ id: Date.now() }, entry);
+            list.push(newEntry);
+            localStorage.setItem(key, JSON.stringify(list));
+        }
+
+        function getRegistrationsOffline(){
+            try { return JSON.parse(localStorage.getItem('registrations') || '[]'); } catch(e){ return []; }
+        }
+
+        function clearRegistrationForm(){
+            const get = (id)=>document.getElementById(id);
+            if (get('participantCategory')) get('participantCategory').value = '';
+            if (get('participantCollege')) get('participantCollege').value = '';
+            if (get('participantGender')) get('participantGender').value = '';
+            if (get('participantName')) get('participantName').value = '';
+            const playerFields = document.getElementById('playerFields');
+            if (playerFields) playerFields.innerHTML = '<div class="player-row">\n                                <input type="text" placeholder="Player 1 Name">\n                                <button class="danger-btn" onclick="removePlayer(this)"><i class="fas fa-times"></i></button>\n                            </div>';
+            const addBtn = document.getElementById('addPlayerBtn');
+            if (addBtn) addBtn.disabled = false;
+            const teamRegisterRow = document.getElementById('teamRegisterRow');
+            if (teamRegisterRow) teamRegisterRow.style.display = 'none';
+            checkRegistrationFields();
+        }
+
+        // Traditional Team Scoring Functions
+        let teamParticipants = [];
+        let filteredTeamData = [];
+        const teamParts = ["A","B1","B2","B3","B4","B5","C1","C2","C3","C4"];
+        const allParts = ["A","B1","B2","B3","B4","B5","C1","C2","C3","C4"]; // reuse for other categories
+
+        // Load team participants from database
+        function loadTeamParticipants() {
+            fetch(API_BASE + '/registrations')
+                .then(response => response.json())
+                .then(data => {
+                    teamParticipants = data.filter(p => p.category === 'Traditional Team');
+                    filteredTeamData = [...teamParticipants];
+                    loadTeamTable(filteredTeamData);
+                })
+                .catch(error => {
+                    const offline = getRegistrationsOffline()
+                        .filter(p => p.category === 'Traditional Team')
+                        .map((p, i) => ({
+                            id: p.id || (i + 1),
+                            name: p.name || (p.teamPlayers && p.teamPlayers.length ? p.teamPlayers.join(', ') : `Team ${i+1}`),
+                            gender: p.gender || '',
+                            college: p.college || '',
+                            category: p.category
+                        }));
+                    if (offline.length) {
+                        teamParticipants = offline;
+                        filteredTeamData = [...teamParticipants];
+                        loadTeamTable(filteredTeamData);
+                        return;
+                    }
+                    console.error('Error loading team participants:', error);
+                    // Fallback to sample data
+                    teamParticipants = [
+                        { id: 1, name: "Arun Kumar", gender: "Male", college: "MKCE", category: "Traditional Team" },
+                        { id: 2, name: "Vishnu", gender: "Male", college: "SNS College", category: "Traditional Team" },
+                        { id: 3, name: "Priya", gender: "Female", college: "PSG Tech", category: "Traditional Team" },
+                        { id: 4, name: "Janani", gender: "Female", college: "MKCE", category: "Traditional Team" }
+                    ];
+                    filteredTeamData = [...teamParticipants];
+                    loadTeamTable(filteredTeamData);
+                });
+        }
+
+        function loadTeamTable(data) {
+            let tbody = document.getElementById("teamScoreBody");
+            tbody.innerHTML = "";
+
+            data.forEach((p,i)=>{
+                const total = calculateTeamTotal(p);
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${i+1}</td>
+                        <td>${p.name}</td>
+                        <td>${p.gender}</td>
+                        <td>${p.college}</td>
+                        <td>${p.category}</td>
+                        <td>
+                            <button class="score-btn" onclick="openTeamJudgeModal(${i})">Score</button>
+                        </td>
+                        <td>${total || 0}</td>
+                        <td>${p.rank || ''}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        // Modal-based Judge Scoring for Team
+        function ensureJudgeStore(player){
+            if (!player.judges) {
+                player.judges = Array.from({length:5}, ()=>({}));
+            }
+            if (!player.scores) player.scores = {};
+        }
+
+        function openTeamJudgeModal(index){
+            const player = filteredTeamData[index];
+            ensureJudgeStore(player);
+            window.__teamJudgePlayerIndex = index;
+            window.__teamJudgeIndex = 0;
+            renderTeamJudgeForm();
+            document.getElementById('teamJudgeModal').style.display = 'flex';
+        }
+
+        function closeTeamJudgeModal(){
+            document.getElementById('teamJudgeModal').style.display = 'none';
+        }
+
+        function renderTeamJudgeForm(){
+            const pIndex = window.__teamJudgePlayerIndex;
+            const jIndex = window.__teamJudgeIndex;
+            const player = filteredTeamData[pIndex];
+            ensureJudgeStore(player);
+
+            const header = document.getElementById('teamJudgeHeader');
+            header.textContent = `Scoring: ${player.name} – Judge ${jIndex+1}`;
+
+            const body = document.getElementById('teamJudgeBody');
+            body.innerHTML = '';
+            const allParts = ['A','B1','B2','B3','B4','B5','C1','C2','C3','C4'];
+            allParts.forEach(part => {
+                const value = player.judges[jIndex][part] ?? '';
+                const row = document.createElement('div');
+                row.style.display = 'flex';
+                row.style.justifyContent = 'space-between';
+                row.style.marginBottom = '8px';
+                row.innerHTML = `<label style=\"width:80px; font-size:16px;\">${part}</label><input id=\"judgeInput_${part}\" type=\"number\" min=\"0\" max=\"10\" step=\"0.01\" value=\"${value}\" class=\"judge-modal-input\" oninput=\"updateJudgeTotalSummary()\">`;
+                body.appendChild(row);
+            });
+
+            // judge selector buttons state
+            document.getElementById('judgePrevBtn').disabled = (jIndex===0);
+            document.getElementById('judgeNextBtn').disabled = (jIndex===4);
+
+            // update total summary for this judge
+            updateJudgeTotalSummary();
+        }
+
+        async function saveTeamJudgeScores(){
+            const pIndex = window.__teamJudgePlayerIndex;
+            const jIndex = window.__teamJudgeIndex;
+            const player = filteredTeamData[pIndex];
+            ensureJudgeStore(player);
+            const allParts = ['A','B1','B2','B3','B4','B5','C1','C2','C3','C4'];
+            allParts.forEach(part => {
+                const input = document.getElementById(`judgeInput_${part}`);
+                const val = input && input.value!=='' ? Number(input.value) : undefined;
+                player.judges[jIndex][part] = (val!==undefined && !Number.isNaN(val)) ? val : undefined;
+            });
+            // compute averages into player.scores
+            allParts.forEach(part => {
+                let sum = 0; let count = 0;
+                player.judges.forEach(j => { if (j[part]!==undefined && j[part]!==null && j[part]!=='' && !Number.isNaN(j[part])) { sum += Number(j[part]); count++; } });
+                player.scores[part] = count>0 ? (sum/count).toFixed(2) : '';
+            });
+            // refresh table row (total column updates)
+            loadTeamTable(filteredTeamData);
+            // compute and show total when 5th judge saved
+            updateJudgeTotalSummary();
+            // Persist to backend if available
+            try {
+                await fetch(API_BASE + '/save-team-judge-scores', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        playerId: player.id,
+                        judgeIndex: jIndex,
+                        scores: player.judges[jIndex]
+                    })
+                });
+            } catch (e) {
+                console.warn('Saving to backend failed (continuing offline):', e);
+            }
+            // provide quick visual feedback
+            closeTeamJudgeModal();
+        }
+
+        function prevJudge(){ if (window.__teamJudgeIndex>0){ window.__teamJudgeIndex--; renderTeamJudgeForm(); } }
+        function nextJudge(){ if (window.__teamJudgeIndex<4){ window.__teamJudgeIndex++; renderTeamJudgeForm(); } }
+
+        function updateJudgeTotalSummary(){
+            const pIndex = window.__teamJudgePlayerIndex;
+            const jIndex = window.__teamJudgeIndex;
+            const player = filteredTeamData[pIndex];
+            ensureJudgeStore(player);
+            const allParts = ['A','B1','B2','B3','B4','B5','C1','C2','C3','C4'];
+            // judge-specific total
+            let jTotal = 0; let filled = false;
+            allParts.forEach(part => {
+                const input = document.getElementById(`judgeInput_${part}`);
+                const v = input && input.value!=='' ? Number(input.value) : undefined;
+                if (v!==undefined && !Number.isNaN(v)) { jTotal += v; filled = true; }
+            });
+            const judgeText = filled ? `Judge ${jIndex+1} total: ${jTotal.toFixed(2)}` : `Judge ${jIndex+1} total: -`;
+            // overall average total across judges (after save we compute scores[])
+            const overallTotal = calculateTeamTotal(player);
+            const overallText = overallTotal ? ` | Overall average total: ${overallTotal.toFixed(2)}` : '';
+            const el = document.getElementById('teamJudgeSummary');
+            if (el) el.textContent = judgeText + overallText;
+        }
+
+        // ========== Clone logic for Traditional Individual, Artistic, Rhythmic ==========
+        let individualData = [];
+        function loadIndividualPlayers(){
+            // TODO: fetch from backend; using teamParticipants as sample
+            individualData = teamParticipants.filter(p=>p.category!==undefined).map(p=>({ ...p, category: 'Traditional Individual' }));
+            renderSimpleList('individualScoreBody', individualData, 'openIndividualJudgeModal');
+        }
+
+        let artisticData = [];
+        function calculateIndividualRankings(){ assignRanks(individualData); renderSimpleList('individualScoreBody', individualData, 'openIndividualJudgeModal'); }
+        function calculateArtisticRankings(){ assignRanks(artisticData); renderSimpleList('artisticScoreBody', artisticData, 'openArtisticJudgeModal'); }
+        function calculateRhythmicRankings(){ assignRanks(rhythmicData); renderSimpleList('rhythmicScoreBody', rhythmicData, 'openRhythmicJudgeModal'); }
+
+        function loadArtisticPlayers(){
+            const g = document.getElementById('artisticGenderSelect')?.value || '';
+            artisticData = teamParticipants.filter(p=>!g || p.gender===g).map(p=>({ ...p, category: 'Artistic' }));
+            renderSimpleList('artisticScoreBody', artisticData, 'openArtisticJudgeModal');
+        }
+
+        function assignRanks(arr){
+            arr.forEach(p=> p.total = calculateTeamTotal(p));
+            arr.sort((a,b)=>b.total - a.total);
+            let currentRank=0,last=null;
+            arr.forEach((p,i)=>{ if(last===null||p.total!==last){ currentRank=i+1; last=p.total;} p.rank=currentRank; });
+        }
+
+        function renderSimpleList(tbodyId, data, openHandler){
+            const tbody = document.getElementById(tbodyId);
+            if (!tbody) return;
+            tbody.innerHTML='';
+            data.forEach((p,i)=>{
+                const total = calculateTeamTotal(p) || 0;
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${i+1}</td>
+                        <td>${p.name||''}</td>
+                        <td>${p.gender||''}</td>
+                        <td>${p.college||''}</td>
+                        <td>${p.category||''}</td>
+                        <td><button class="score-btn" onclick="${openHandler}(${i})">Score</button></td>
+                        <td>${total}</td>
+                        <td>${p.rank||''}</td>
+                    </tr>`;
+            });
+        }
+
+        // Reuse same modal for all; track which list is active
+        let activeList = 'team';
+        function openIndividualJudgeModal(i){ activeList='individual'; filteredTeamData = individualData; openTeamJudgeModal(i); }
+        function openArtisticJudgeModal(i){ activeList='artistic'; filteredTeamData = artisticData; openTeamJudgeModal(i); }
+        let rhythmicData = [];
+        function loadRhythmicPlayers(){
+            const g = document.getElementById('rhythmicGenderSelect')?.value || '';
+            rhythmicData = teamParticipants.filter(p=>!g || p.gender===g).map(p=>({ ...p, category: 'Rhythmic' }));
+            renderSimpleList('rhythmicScoreBody', rhythmicData, 'openRhythmicJudgeModal');
+        }
+        function openRhythmicJudgeModal(i){ activeList='rhythmic'; filteredTeamData = rhythmicData; openTeamJudgeModal(i); }
+
+        // After save, re-render appropriate list
+        const _origSave = saveTeamJudgeScores;
+        saveTeamJudgeScores = async function(){
+            await _origSave();
+            if(activeList==='individual'){ renderSimpleList('individualScoreBody', individualData, 'openIndividualJudgeModal'); }
+            else if(activeList==='artistic'){ renderSimpleList('artisticScoreBody', artisticData, 'openArtisticJudgeModal'); }
+            else if(activeList==='rhythmic'){ renderSimpleList('rhythmicScoreBody', rhythmicData, 'openRhythmicJudgeModal'); }
+            else { loadTeamTable(filteredTeamData); }
+        }
+
+        // No-op kept for compatibility if referenced elsewhere
+        function sanitizeNumericInput(){ updateJudgeTotalSummary(); }
+
+        function calculateTeamTotal(p){
+            // If judges exist, compute averages first
+            if (p.judges && Array.isArray(p.judges) && p.judges.length){
+                if (!p.scores) p.scores = {};
+                const allParts = ['A','B1','B2','B3','B4','B5','C1','C2','C3','C4'];
+                allParts.forEach(part => {
+                    let sum = 0; let count = 0;
+                    p.judges.forEach(j => { if (j && j[part]!==undefined && j[part]!=='' && !Number.isNaN(j[part])) { sum += Number(j[part]); count++; } });
+                    p.scores[part] = count>0 ? (sum/count).toFixed(2) : '';
+                });
+            }
+            let total = 0;
+            teamParts.forEach(part => total += Number(p.scores?.[part] || 0));
+            return Number(total.toFixed(2));
+        }
+
+        function calculateTeamRankings(){
+            // compute totals using judge averages
+            filteredTeamData.forEach(p => p.total = calculateTeamTotal(p));
+            filteredTeamData.sort((a,b)=>b.total - a.total);
+            let currentRank = 0;
+            let lastTotal = null;
+            filteredTeamData.forEach((p,i)=>{
+                if (lastTotal === null || p.total !== lastTotal) {
+                    currentRank = i + 1;
+                    lastTotal = p.total;
+                }
+                p.rank = currentRank;
+            });
+            loadTeamTable(filteredTeamData);
+        }
+
+        function filterTeamByGender(){
+            let selected = document.getElementById("teamGenderFilter").value;
+            filteredTeamData = selected==='All' ? [...teamParticipants] : teamParticipants.filter(p=>p.gender===selected);
+            loadTeamTable(filteredTeamData);
+        }
+
+        function printTeamScoreSheet(){
+            // Open a clean print view that shows the official score sheet image on A4 landscape.
+            // Ensure there is an image named "score-sheet.png" in the same folder as this file.
+            const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Print – Team Score Sheet</title>
+    <style>
+        html, body { margin: 0; padding: 0; background: #fff; }
+        .sheet { width: 297mm; height: 210mm; display: grid; place-items: center; }
+        .sheet img { width: 100%; height: 100%; object-fit: contain; }
+        @page { size: A4 landscape; margin: 10mm; }
+        @media print {
+            .sheet { width: auto; height: auto; }
+            .sheet img { width: 100%; height: auto; page-break-inside: avoid; }
+        }
+    </style>
+<\/head>
+<body onload="setTimeout(function(){ window.print(); }, 100)">
+    <div class="sheet">
+        <img src="score-sheet.png" alt="Anna University Yogasana – Score Sheet" />
+    </div>
+</body>
+</html>`;
+            const printWindow = window.open('', '_blank');
+            if (printWindow) {
+                printWindow.document.open();
+                printWindow.document.write(html);
+                printWindow.document.close();
+            } else {
+                alert('Popup blocked. Please allow popups for printing.');
+            }
+        }
+
+        // Print a blank official sheet for any category
+        // categoryTitle: 'Traditional' | 'Artistic' | 'Rhythmic'
+        // participantMode: 'Team' | 'Individual'
+        function printBlankOfficialSheet(categoryTitle, participantMode){
+            const today = '8/10/2025';
+            const rows = Array.from({length: 6}).map((_,i)=>{
+                return `<tr>
+                    <td class="sl">${i+1}</td>
+                    <td class="name"></td>
+                    <td class="a"></td>
+                    <td class="b">&nbsp;</td>
+                    <td class="b">&nbsp;</td>
+                    <td class="b">&nbsp;</td>
+                    <td class="b">&nbsp;</td>
+                    <td class="b">&nbsp;</td>
+                    <td class="c">&nbsp;</td>
+                    <td class="c">&nbsp;</td>
+                    <td class="c">&nbsp;</td>
+                    <td class="c">&nbsp;</td>
+                    <td class="total"></td>
+                </tr>`;
+            }).join('');
+
+            const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>${categoryTitle} Official Score Sheet – ${participantMode}</title>
+    <style>
+        :root{ --line:#000; }
+        html,body{ margin:0; padding:0; }
+        body{ font-family: Arial, Helvetica, sans-serif; }
+        .page{ width: 297mm; height: 210mm; padding: 8mm; box-sizing: border-box; }
+        h1,h2,h3,p{ margin:0; }
+        .center{ text-align:center; }
+        .top-head{ text-align:center; margin-bottom: 6mm; }
+        .meta{ display:flex; justify-content:space-between; align-items:center; margin-bottom: 3mm; font-size: 12px; }
+        .small{ font-size:12px; }
+        table{ width:100%; border-collapse:collapse; table-layout: fixed; }
+        th,td{ border:1px solid var(--line); padding:2mm 1mm; text-align:center; font-size:12px; }
+        th{ background:#f3f3f3; }
+        .w-sl{ width: 6mm; }
+        .w-name{ width: 58mm; text-align:left; }
+        .w-a{ width: 12mm; }
+        .w-b,.w-c{ width: 12mm; }
+        .w-total{ width: 14mm; }
+        .grid-head{ border-bottom: none; }
+        .sub-grid-head{ border-top: none; }
+        .footer{ margin-top: 4mm; display:flex; justify-content:space-between; font-size:12px; }
+        .grand-row td{ font-weight: bold; }
+        @page{ size: A4 landscape; margin: 8mm; }
+        @media print{ .page{ width:auto; height:auto; } }
+    </style>
+<\/head>
+<body onload="setTimeout(function(){ window.print(); }, 100)">
+    <div class="page">
+        <div class="top-head">
+            <div class="small">ANNA UNIVERSITY INTERZONAL YOGASANA COMPETITION (M/W) 2025-26</div>
+            <div class="small">Anna University Sports Board Chennai</div>
+            <div class="small"><i>Organised by M. KUMARASAMY COLLEGE OF ENGINEERING, KARUR</i></div>
+        </div>
+
+        <div class="meta">
+            <div><strong>NAME OF THE INSTITUTION:</strong> ____________________________</div>
+            <div>
+                <span>MEN ☐ / WOMEN ☐</span>
+                <span style="margin-left:12mm;">${categoryTitle.toUpperCase()} : ${participantMode==='Team'?'☒ Team ☐ Individual':'☐ Team ☒ Individual'}</span>
+                <span style="margin-left:12mm;">DATE: ${today}</span>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2" class="w-sl">Sl. No</th>
+                    <th rowspan="2" class="w-name">NAME OF THE PLAYER</th>
+                    <th rowspan="2" class="w-a">Part A<br/>Surya Namaskar<br/>10 Marks</th>
+                    <th colspan="5">Part B<br/>Compulsory Asanas<br/>50 Marks</th>
+                    <th colspan="4">Part C<br/>Optional Asanas<br/>40 Marks</th>
+                    <th rowspan="2" class="w-total">Total Marks 100<br/>(A+B+C)</th>
+                </tr>
+                <tr>
+                    <th class="w-b">B1</th>
+                    <th class="w-b">B2</th>
+                    <th class="w-b">B3</th>
+                    <th class="w-b">B4</th>
+                    <th class="w-b">B5</th>
+                    <th class="w-c">C1</th>
+                    <th class="w-c">C2</th>
+                    <th class="w-c">C3</th>
+                    <th class="w-c">C4</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${rows}
+            </tbody>
+            <tfoot>
+                <tr class="grand-row">
+                    <td colspan="12" style="text-align:right;">GRAND TOTAL</td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="footer">
+            <div>Jury No: ________</div>
+            <div>Sign: ______________________</div>
+        </div>
+    </div>
+</body>
+</html>`;
+            const win = window.open('', '_blank');
+            if (win) {
+                win.document.open();
+                win.document.write(html);
+                win.document.close();
+            } else {
+                alert('Popup blocked. Please allow popups to print.');
+            }
+        }
+
+        // Rhythmic blank score sheet (8 rows, columns per provided layout)
+        function printBlankRhythmicSheet(){
+            const today = '8/10/2025';
+            const rows = Array.from({length: 8}).map((_,i)=>{
+                return `<tr>
+                    <td class="sl">${i+1}</td>
+                    <td class="name"></td>
+                    <td class="c05"></td>
+                    <td class="c05"></td>
+                    <td class="c05"></td>
+                    <td class="c05"></td>
+                    <td class="c6"></td>
+                    <td class="c15"></td>
+                    <td class="c15"></td>
+                    <td class="total"></td>
+                    <td class="rank"></td>
+                </tr>`;
+            }).join('');
+
+            const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Rhythmic Yogasana – Blank Score Sheet</title>
+    <style>
+        :root{ --line:#000; }
+        html,body{ margin:0; padding:0; }
+        body{ font-family: Arial, Helvetica, sans-serif; }
+        .page{ width: 297mm; height: 210mm; padding: 8mm; box-sizing: border-box; }
+        h1,h2,h3,p{ margin:0; }
+        .small{ font-size:12px; }
+        .top-head{ text-align:center; margin-bottom: 6mm; }
+        .meta{ display:flex; justify-content:space-between; align-items:center; margin-bottom: 3mm; font-size: 12px; }
+        table{ width:100%; border-collapse:collapse; table-layout: fixed; }
+        th,td{ border:1px solid var(--line); padding:2mm 1mm; text-align:center; font-size:12px; }
+        th{ background:#f3f3f3; }
+        .w-sl{ width: 8mm; }
+        .w-name{ width: 88mm; text-align:left; }
+        .w-c05{ width: 18mm; }
+        .w-c6{ width: 24mm; }
+        .w-c15{ width: 18mm; }
+        .w-total{ width: 18mm; }
+        .w-rank{ width: 14mm; }
+        @page{ size: A4 landscape; margin: 8mm; }
+        @media print{ .page{ width:auto; height:auto; } }
+    </style>
+</head>
+<body onload="setTimeout(function(){ window.print(); }, 100)">
+    <div class="page">
+        <div class="top-head">
+            <div class="small"><strong>ANNA UNIVERSITY INTERZONAL YOGASANA COMPETITION 2025-26</strong></div>
+            <div class="small">Anna University Sports Board Chennai</div>
+            <div class="small"><i>Organised by M. KUMARASAMY COLLEGE OF ENGINEERING, KARUR</i></div>
+        </div>
+        <div class="meta">
+            <div><strong>RHYTHMIC YOGASANA</strong></div>
+            <div>MEN / WOMEN</div>
+            <div>Date: ${today}</div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th class="w-sl" rowspan="2">Sl NO</th>
+                    <th class="w-name" rowspan="2">Name of the Player & Institution</th>
+                    <th class="w-c05" rowspan="2">Costume and style (0.5)</th>
+                    <th class="w-c05" rowspan="2">Expression (0.5)</th>
+                    <th class="w-c05" rowspan="2">Theme and music (0.5)</th>
+                    <th class="w-c05" rowspan="2">Covering stage (0.5)</th>
+                    <th class="w-c6" rowspan="2">Asana & timing (6)</th>
+                    <th class="w-c15" rowspan="2">Sync. (0.5)</th>
+                    <th class="w-c15" rowspan="2">Dance (1.5)</th>
+                    <th class="w-total" rowspan="2">Total (10)</th>
+                    <th class="w-rank" rowspan="2">Rank</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${rows}
+            </tbody>
+        </table>
+        <div style="margin-top:6mm; display:flex; gap:20mm; font-size:12px;">
+            <div>JUDGE Sign: ____________________</div>
+            <div>Name: ____________________</div>
+        </div>
+    </div>
+</body>
+</html>`;
+
+            const win = window.open('', '_blank');
+            if (win) {
+                win.document.open();
+                win.document.write(html);
+                win.document.close();
+            } else {
+                alert('Popup blocked. Please allow popups to print.');
+            }
+        }
+
+        // Artistic blank score sheet (8 rows, ASANAS 1..5 columns with timing + Attempt I/II, Total, Rank)
+        function printBlankArtisticSheet(){
+            const today = '8/10/2025';
+            const rows = Array.from({length: 8}).map((_,i)=>{
+                const asanaCell = `
+                    <td class=\"asana\">\n                        <div class=\"mini-grid\"><div class=\"mini-cell mini-clock\">⏱</div><div class=\"mini-cell\">I</div><div class=\"mini-cell\">II</div></div>\n                        <div class=\"cell-space\"></div>\n                    </td>`;
+                return `<tr>\n                    <td class=\"sl\">${i+1}</td>\n                    <td class=\"name\"><div class="cell-space" style="height:14mm;"></div></td>\n                    ${asanaCell}\n                    ${asanaCell}\n                    ${asanaCell}\n                    ${asanaCell}\n                    ${asanaCell}\n                    <td class=\"total\"><div class="cell-space"></div></td>\n                    <td class=\"rank\"><div class="cell-space"></div></td>\n                </tr>`;
+            }).join('');
+
+            const html = `<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"utf-8\">\n    <title>Artistic Yogasana – Blank Score Sheet</title>\n    <style>\n        :root{ --line:#000; }\n        html,body{ margin:0; padding:0; }\n        body{ font-family: Arial, Helvetica, sans-serif; }\n        .page{ width: 297mm; height: 210mm; padding: 8mm; box-sizing: border-box; }\n        h1,h2,h3,p{ margin:0; }\n        .small{ font-size:12px; }\n        .top-head{ text-align:center; margin-bottom: 6mm; }\n        .meta{ display:flex; justify-content:space-between; align-items:center; margin-bottom: 3mm; font-size: 12px; }\n        table{ width:100%; border-collapse:collapse; table-layout: fixed; }\n        th,td{ border:1px solid var(--line); padding:2mm 1mm; text-align:center; font-size:12px; }\n        th{ background:#f3f3f3; }\n        .w-sl{ width: 8mm; }\n        .w-name{ width: 80mm; text-align:left; }\n        .w-asana{ width: 24mm; }\n        .w-total{ width: 18mm; }\n        .w-rank{ width: 14mm; }\n        .mini-grid{ display:grid; grid-template-columns: 12px 12px 12px; gap:2px; justify-content:center; margin-top:2px; }\n        .mini-cell{ border:1px solid var(--line); height:10px; line-height:10px; font-size:10px; }\n        .mini-clock{ font-size:10px; }\n        .cell-space{ height: 22mm; }\n        @page{ size: A4 landscape; margin: 8mm; }\n        @media print{ .page{ width:auto; height:auto; } }\n    </style>\n</head>\n<body onload=\"setTimeout(function(){ window.print(); }, 100)\">\n    <div class=\"page\">\n        <div class=\"top-head\">\n            <div class=\"small\"><strong>ANNA UNIVERSITY INTERZONAL YOGASANA COMPETITION 2025-26</strong></div>\n            <div class=\"small\">Anna University Sports Board Chennai</div>\n            <div class=\"small\"><i>Organised by M. KUMARASAMY COLLEGE OF ENGINEERING, KARUR</i></div>\n        </div>\n        <div class=\"meta\">\n            <div><strong>ARTISTIC YOGASANA</strong></div>\n            <div>MEN / WOMEN</div>\n            <div>Date: ${today}</div>\n        </div>\n        <table>\n            <thead>\n                <tr>\n                    <th class=\"w-sl\" rowspan=\"2\">SL.No</th>\n                    <th class=\"w-name\" rowspan=\"2\">Name of the Player & Institution</th>\n                    <th class=\"w-asana\" colspan=\"5\">ASANAS</th>\n                    <th class=\"w-total\" rowspan=\"2\">Total</th>\n                    <th class=\"w-rank\" rowspan=\"2\">Rank</th>\n                </tr>\n                <tr>\n                    <th class=\"w-asana\">1<div class=\"mini-grid\"><div class=\"mini-cell mini-clock\">⏱</div><div class=\"mini-cell\">I</div><div class=\"mini-cell\">II</div></div></th>\n                    <th class=\"w-asana\">2<div class=\"mini-grid\"><div class=\"mini-cell mini-clock\">⏱</div><div class=\"mini-cell\">I</div><div class=\"mini-cell\">II</div></div></th>\n                    <th class=\"w-asana\">3<div class=\"mini-grid\"><div class=\"mini-cell mini-clock\">⏱</div><div class=\"mini-cell\">I</div><div class=\"mini-cell\">II</div></div></th>\n                    <th class=\"w-asana\">4<div class=\"mini-grid\"><div class=\"mini-cell mini-clock\">⏱</div><div class=\"mini-cell\">I</div><div class=\"mini-cell\">II</div></div></th>\n                    <th class=\"w-asana\">5<div class=\"mini-grid\"><div class=\"mini-cell mini-clock\">⏱</div><div class=\"mini-cell\">I</div><div class=\"mini-cell\">II</div></div></th>\n                </tr>\n            </thead>\n            <tbody>\n                ${rows}\n            </tbody>\n        </table>\n        <div style=\"margin-top:6mm; display:flex; gap:20mm; font-size:12px;\">\n            <div>JUDGE Sign: ____________________</div>\n            <div>Name: ____________________</div>\n        </div>\n    </div>\n</body>\n</html>`;
+
+            const win = window.open('', '_blank');
+            if (win) {
+                win.document.open();
+                win.document.write(html);
+                win.document.close();
+            } else {
+                alert('Popup blocked. Please allow popups to print.');
+            }
+        }
+
+        // Load team participants when Traditional Team section is shown
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add event listener for when Traditional Team section is displayed
+            const originalShowCategories = window.showCategories;
+            window.showCategories = function() {
+                originalShowCategories();
+                // Reset team data when going back to categories
+            };
+        });
+    </script>
+    <!-- Team Judge Modal -->
+    <div id="teamJudgeModal" class="score-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeTeamJudgeModal()">&times;</span>
+            <h3 id="teamJudgeHeader" style="margin-bottom: 10px;">Scoring</h3>
+            <div style="display:flex; gap:10px; align-items:center; margin-bottom:10px;">
+                <button id="judgePrevBtn" class="secondary-btn" onclick="prevJudge()">&laquo; Prev Judge</button>
+                <div>Judge <span id="judgeNoDisp"></span></div>
+                <button id="judgeNextBtn" class="secondary-btn" onclick="nextJudge()">Next Judge &raquo;</button>
+            </div>
+            <div id="teamJudgeBody"></div>
+            <div id="teamJudgeSummary" style="margin-top:12px; font-weight:600;"></div>
+            <div style="text-align:right; margin-top: 12px;">
+                <button class="action-btn" onclick="saveTeamJudgeScores()">Save Judge Scores</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
